@@ -8,10 +8,24 @@ This repo is only used on my Raspberry Pi 4 with Ubuntu 20.04 (ARM64).
 
 Some of the dependencies requires to compile based on the architecture of hardware and OS, so the docker image need to be built on Raspberry Pi 4.
 
-I pushed the images to Github Container Registry already:
+I pushed the images to **Github Container Registry** already:
 
 * ghcr.io/grammy-jiang/airflow:latest (ghcr.io/grammy-jiang/airflow:2.0.0.dev0)
 * ghcr.io/grammy-jiang/airflow:2.0.0.dev0
+
+The command to push the image to **Github Container Registry**:
+
+```console
+foo@bar:~$ docker push ghcr.io/grammy-jiang/airflow:<tag>
+...
+```
+
+The command to pull the image from **Github Container Registry**:
+
+```console
+foo@bar:~$ docker pull ghcr.io/grammy-jiang/airflow:<tag>
+...
+```
 
 # Reference
 
