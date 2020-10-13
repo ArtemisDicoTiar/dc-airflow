@@ -49,6 +49,18 @@ foo@bar:~$ docker run --rm -v "/home/grammy-jiang/projects/dc-airflow/airflow:/o
 
 In the container, `$AIRFLOW_HOME` is `/opt/airflow`.
 
+The content of `airflow`:
+
+```console
+foo@bar:~$ k -h airflow
+total 608
+-rw-r--r-- 1 50000 50000  35K 13 Oct   15:27 + airflow.cfg 
+-rw-r--r-- 1 50000 50000 248K 13 Oct   15:27 + airflow.db 
+drwxr-xr-x 3 50000 50000 4.0K 13 Oct   15:27 | logs 
+-rw-r--r-- 1 50000 50000 2.3K 13 Oct   15:27 + unittests.cfg 
+-rw-r--r-- 1 50000 50000 4.4K 13 Oct   15:27 + webserver_config.py 
+```
+
 # Reference
 
 * [apache/airflow: Apache Airflow - A platform to programmatically author, schedule, and monitor workflows](https://github.com/apache/airflow)
