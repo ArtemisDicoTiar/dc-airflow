@@ -29,7 +29,7 @@ foo@bar:~$ docker pull ghcr.io/grammy-jiang/airflow:<tag>
 
 ## MySQL as backend
 
-In this repo, MySQL is chosed as backend. In the document of Apache Airflow, the version 8 of MySQL is supported by the latest version of Apache Airflow.
+In this repo, MySQL is chosed as backend. In the document of Apache Airflow, the version 8 of MySQL is [supported](https://github.com/apache/airflow#requirements) by the latest version of Apache Airflow.
 
 # Reference
 
