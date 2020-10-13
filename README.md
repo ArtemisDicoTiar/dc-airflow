@@ -66,7 +66,7 @@ drwxr-xr-x 3 50000 50000 4.0K 13 Oct   15:27 | logs
 ```console
 foo@bar:~$ docker run \
 --rm \
--v "/home/grammy-jiang/projects/dc-airflow/airflow:/opt/airflow" \
+--volume "/home/grammy-jiang/projects/dc-airflow/airflow:/opt/airflow" \
 ghcr.io/grammy-jiang/airflow:latest \
 users create \
 --email grammy-jiang@gmail.com \
