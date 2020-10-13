@@ -80,6 +80,12 @@ users create \
 Admin user grammy-jiang created.
 ```
 
+## Apache Airflow configruation
+
+The configuration file is created in `./airflow/airflow.cfg`.
+
+* expose the configuration: https://airflow.apache.org/docs/stable/configurations-ref.html#expose-config
+
 # Reference
 
 * [apache/airflow: Apache Airflow - A platform to programmatically author, schedule, and monitor workflows](https://github.com/apache/airflow)
