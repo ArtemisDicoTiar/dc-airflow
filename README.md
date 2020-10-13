@@ -64,7 +64,17 @@ drwxr-xr-x 3 50000 50000 4.0K 13 Oct   15:27 | logs
 ## Create the first user of Apache Airflow
 
 ```console
-foo@bar:~$ docker run --rm -v "/home/grammy-jiang/projects/dc-airflow/airflow:/opt/airflow" ghcr.io/grammy-jiang/airflow:latest users create --email grammy-jiang@gmail.com --firstname Grammy --lastname Jiang --password <password> --role Admin --username grammy-jiang
+foo@bar:~$ docker run \
+--rm \
+-v "/home/grammy-jiang/projects/dc-airflow/airflow:/opt/airflow" \
+ghcr.io/grammy-jiang/airflow:latest \
+users create \
+--email grammy-jiang@gmail.com \
+--firstname Grammy \
+--lastname Jiang \
+--password <password> \
+--role Admin \
+--username grammy-jiang
 [2020-10-13 05:12:53,481] {dagbag.py:431} INFO - Filling up the DagBag from /opt/airflow/dags
 [2020-10-13 05:12:54,569] {manager.py:719} WARNING - No user yet created, use flask fab command to do it.
 Admin user grammy-jiang created.
