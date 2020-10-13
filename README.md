@@ -31,6 +31,24 @@ foo@bar:~$ docker pull ghcr.io/grammy-jiang/airflow:<tag>
 
 In this repo, MySQL is chosed as backend. In the document of Apache Airflow, the version 8 of MySQL is [supported](https://github.com/apache/airflow#requirements) by the latest version of Apache Airflow.
 
+## Prepare `$AIRFLOW_HOME`
+
+Create the folder of `$AIRFLOW_HOME`, and assign the right owner:
+
+```console
+foo@bar:~$ mkdir airflow
+foo@bar:~$ sudo chown 50000:0 airflow
+...
+```
+
+Initialize Apache Airflow:
+
+```console
+foo@bar:~$ docker run --rm -v "/home/grammy-jiang/projects/dc-airflow/airflow:/opt/airflow" ghcr.io/grammy-jiang/airflow:latest db init
+```
+
+In the container, `$AIRFLOW_HOME` is `/opt/airflow`.
+
 # Reference
 
 * [apache/airflow: Apache Airflow - A platform to programmatically author, schedule, and monitor workflows](https://github.com/apache/airflow)
