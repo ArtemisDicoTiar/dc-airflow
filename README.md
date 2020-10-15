@@ -27,9 +27,17 @@ foo@bar:~$ docker pull ghcr.io/grammy-jiang/airflow:<tag>
 ...
 ```
 
-## MySQL as backend
+## PostgreSQL as backend
 
-In this repo, MySQL is chosed as backend. In the document of Apache Airflow, the version 8 of MySQL is [supported](https://github.com/apache/airflow#requirements) by the latest version of Apache Airflow.
+In this repo, PostgreSQL is chosen as backend. In the document of Apache Airflow, the version 10 of PostgreSQL is [supported](https://github.com/apache/airflow#requirements) by the latest version of Apache Airflow.
+
+## Prepare
+
+### Initialize PostgreSQL database and user
+
+Create a docker container to initialize PostgreSQL database and user which mentions in [`postgres.env`](https://github.com/grammy-jiang/dc-airflow/blob/master/postgres.env).
+
+### Initialize Apache Airflow
 
 ## Prepare `$AIRFLOW_HOME`
 
@@ -47,7 +55,7 @@ Initialize Apache Airflow:
 foo@bar:~$ docker run --rm -v "/home/grammy-jiang/projects/dc-airflow/airflow:/opt/airflow" ghcr.io/grammy-jiang/airflow:latest db init
 ```
 
-In the container, `$AIRFLOW_HOME` is `/opt/airflow`.
+In the container, `$AIRFLOW_HOME` is `/opt/airflow` ([airflow/Dockerfile at master · apache/airflow](https://github.com/apache/airflow/blob/master/Dockerfile#L41)).
 
 The content of `airflow`:
 
@@ -61,10 +69,13 @@ drwxr-xr-x 3 50000 50000 4.0K 13 Oct   15:27 | logs
 -rw-r--r-- 1 50000 50000 4.4K 13 Oct   15:27 + webserver_config.py 
 ```
 
-## Create the first user of Apache Airflow
+### Create the first user of Apache Airflow
 
 ```console
 foo@bar:~$ docker run \
+--env-file airflow.env \
+--link dc-airflow-postgres \
+--network dc-airflow_nw-airflow \
 --rm \
 --volume "/home/grammy-jiang/projects/dc-airflow/airflow:/opt/airflow" \
 ghcr.io/grammy-jiang/airflow:latest \
@@ -83,6 +94,8 @@ Admin user grammy-jiang created.
 ## Apache Airflow configruation
 
 The configuration file is created in `./airflow/airflow.cfg`.
+
+For this docker-compose, the configuration is in [`airflow.env`](https://github.com/grammy-jiang/dc-airflow/blob/master/airflow.env).
 
 * expose the configuration: https://airflow.apache.org/docs/stable/configurations-ref.html#expose-config
 
