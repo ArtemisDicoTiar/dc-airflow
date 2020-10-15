@@ -12,6 +12,7 @@ I pushed the images to **Github Container Registry** already:
 
 * ghcr.io/grammy-jiang/airflow:latest (ghcr.io/grammy-jiang/airflow:2.0.0.dev0)
 * ghcr.io/grammy-jiang/airflow:2.0.0.dev0
+* ghcr.io/grammy-jiang/airflow:1.10.12
 
 The command to push the image to **Github Container Registry**:
 
