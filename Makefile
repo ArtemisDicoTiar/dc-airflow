@@ -5,7 +5,9 @@ export
 
 pwd := $(shell pwd)
 
+img_postgres = postgres
 ver_postgres = 10-alpine
+img_airflow = ghcr.io/grammy-jiang/airflow
 ver_airflow = latest
 
 postgres-initdb:
@@ -19,7 +21,7 @@ postgres-initdb:
 		--rm \
 		--volume $(pwd)/postgres-data:/var/lib/postgresql/data \
 		--volume $(pwd)/postgres-initdb.d:/docker-entrypoint-initdb.d \
-		postgres:$(ver_postgres) > /dev/null
+		$(img_postgres):$(ver_postgres) > /dev/null
 	@sleep 8
 	@docker logs postgres-initdb
 	@docker stop postgres-initdb > /dev/null
@@ -35,7 +37,7 @@ airflow-init:
 		--rm \
 		--volume $(pwd)/postgres-data:/var/lib/postgresql/data \
 		--volume $(pwd)/postgres-initdb.d:/docker-entrypoint-initdb.d \
-		postgres:$(ver_postgres) > /dev/null
+		$(img_postgres):$(ver_postgres) > /dev/null
 	@while [ $$(docker inspect --format={{.State.Status}} dc-airflow-postgres) != "running" ]; \
 	do \
 		sleep 0.5; \
@@ -49,7 +51,7 @@ airflow-init:
 		--link dc-airflow-postgres \
 		--rm \
 		--volume $(pwd)/airflow:/opt/airflow \
-		ghcr.io/grammy-jiang/airflow:$(ver_airflow) \
+		$(img_airflow):$(ver_airflow) \
 		db init
 	@echo "======================================="
 	@echo "Adding the first user to Apache Airflow"
@@ -59,7 +61,7 @@ airflow-init:
 		--link dc-airflow-postgres \
 		--rm \
 		--volume $(pwd)/airflow:/opt/airflow \
-		ghcr.io/grammy-jiang/airflow:latest \
+		$(img_airflow):$(ver_airflow) \
 		users create \
 		--email $$airflow_email \
 		--firstname $$airflow_firstname \
