@@ -16,6 +16,18 @@ services:
             - /home/ubuntu/airflow/db-data:/var/lib/postgresql/data
             - /home/ubuntu/airflow/postgres-initdb.d:/docker-entrypoint-initdb.d/
 
+    airflow-init:
+        command: initdb
+        container_name: airflow-init
+        depends_on:
+            - postgres
+        env_file:
+            - airflow.env
+        image: theobjectivedad/airflow-multi
+        networks:
+            - nw-airflow
+        
+        tty: true
     airflow-scheduler:
         command: scheduler
         container_name: dc-airflow-scheduler
@@ -23,13 +35,14 @@ services:
             - postgres
         env_file:
             - airflow.env
-        image: ghcr.io/grammy-jiang/airflow:latest
+        image: theobjectivedad/airflow-multi
         networks:
             - nw-airflow
         restart: always
         tty: true
         volumes:
-            - /home/ubuntu/airflow:/opt/airflow
+            - /home/ubuntu/airflow:/airflow
+            
     airflow-webserver:
         command: webserver
         container_name: dc-airflow-webserver
@@ -38,7 +51,7 @@ services:
             - airflow-scheduler
         env_file:
             - airflow.env
-        image: ghcr.io/grammy-jiang/airflow:latest
+        image: theobjectivedad/airflow-multi
         networks:
             - nw-airflow
         ports:
@@ -46,7 +59,7 @@ services:
         restart: always
         tty: true
         volumes:
-            - /home/ubuntu/airflow:/opt/airflow
+            - /home/ubuntu/airflow:/airflow
 
 networks:
     nw-airflow:
