@@ -33,6 +33,7 @@ services:
         container_name: dc-airflow-scheduler
         depends_on:
             - postgres
+            - airflow-init
         env_file:
             - airflow.env
         image: theobjectivedad/airflow-multi
@@ -49,6 +50,7 @@ services:
         depends_on:
             - postgres
             - airflow-scheduler
+            - airflow-init
         env_file:
             - airflow.env
         image: theobjectivedad/airflow-multi
