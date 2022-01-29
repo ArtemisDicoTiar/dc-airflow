@@ -2,7 +2,7 @@ version: "3"
 
 services:
     postgres:
-        container_name: dc-airflow-postgres
+        container_name: airflow-db
         env_file:
             - postgres.env
         image: postgres:10-alpine
@@ -13,8 +13,8 @@ services:
         restart: always
         tty: true
         volumes:
-            - ./postgres-data:/var/lib/postgresql/data
-            - ./postgres-initdb.d:/docker-entrypoint-initdb.d/
+            - /home/ubuntu/airflow/db-data:/var/lib/postgresql/data
+            - /home/ubuntu/airflow/postgres-initdb.d:/docker-entrypoint-initdb.d/
 
     airflow-scheduler:
         command: scheduler
@@ -29,7 +29,7 @@ services:
         restart: always
         tty: true
         volumes:
-            - ./airflow:/opt/airflow
+            - /home/ubuntu/airflow:/opt/airflow
     airflow-webserver:
         command: webserver
         container_name: dc-airflow-webserver
@@ -46,7 +46,7 @@ services:
         restart: always
         tty: true
         volumes:
-            - ./airflow:/opt/airflow
+            - /home/ubuntu/airflow:/opt/airflow
 
 networks:
     nw-airflow:
